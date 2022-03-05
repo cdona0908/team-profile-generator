@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "inquirer": "^8.2.0",
+    "jest": "^27.5.1"
+  },
+  "name": "team-profile-generator",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdona0908/team-profile-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdona0908/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/cdona0908/team-profile-generator#readme"
+}
