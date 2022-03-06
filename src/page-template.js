@@ -4,17 +4,17 @@ const generateEmployees = employeesArr => {
     <div class="col-12 col-md-4">
         <div class="card " id="employee-card">
             <div class="card-header text-white">
-                <h3 class="card-title" id="employee-name">Employee</h3>
+                <h3 class="card-title" id="employee-name">${name}</h3>
                 <div class="card-text">
-                <i class="fa-solid fa-user-graduate"></i>
-                <h4>Role</h4>
+                <i class="${icon}"></i>
+                <h4>${rol}</h4>
                 </div>
             </div>
             <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID:</li>
-                <li class="list-group-item">Email:</li>
-                <li class="list-group-item">Contact:</li>
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email:${email}</li>
+                <li class="list-group-item">${contactLabel} ${contactInfo}</li>
                 </ul>
             </div>
         </div>
