@@ -1,10 +1,21 @@
+//Node Module for inquirer
 const inquirer = require('inquirer');
+
+//Access to page generation
 const generatePage = require('./src/page-template');
+
+// utilities to generate the HTML file
 const {writeFile, copyFile} = require('./utils/generate-site');
+
+//team classes
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
+//Array to store the employee's information
+const employeesArr =[];
+
+//Start app by prompting the manager
 const promptManager = () => {
     return inquirer.prompt([
         {
@@ -37,11 +48,13 @@ const promptManager = () => {
             type: 'input',
             name: 'email',
             message: "Enter the manager's email? (Required)",
-            validate: emailInput => {
-                if (emailInput) {
+            validate: function (email) {
+
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
                 return true;
                 } else {
-                console.log("Please enter the manager's email!");
+                console.log("Please enter a valid email!");
                 return false;
                 }
             }
@@ -51,19 +64,25 @@ const promptManager = () => {
             name: 'office',
             message: "Enter the manager's office number? (Required)",
             validate: officeInput => {
-                if (officeInput) {
-                return true;
+                if (isNaN(officeInput)) {
+                console.log("Please enter a valid office number!");
+                return false;                
                 } else {
-                console.log("Please enter the manager's office number!");
-                return false;
+                    return true;
                 }
             }
         }
-    ]);
+    ]).then(({name, id, email, office})=>{
+        const manager = new Manager(name, id, email, office);
+        employeesArr.push(manager);
+        console.log (manager);
+        //console.log(employeesArr);
+        
+    })
 };
 
 const promptEmployee = () =>{
-    //Remember to Add an Array for Employees, if there is no Array at the begining, create it
+    
     inquirer
        .prompt({
             type: 'list',
@@ -107,11 +126,13 @@ const promptEmployee = () =>{
                         type: 'input',
                         name: 'email',
                         message: "Enter the engineer's email? (Required)",
-                        validate: emailInput => {
-                            if (emailInput) {
+                        validate: function (email) {
+
+                            valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                            if (valid) {
                             return true;
                             } else {
-                            console.log("Please enter the engineer's email!");
+                            console.log("Please enter a valid email!");
                             return false;
                             }
                         }
@@ -130,7 +151,14 @@ const promptEmployee = () =>{
                         }
                     }
 
-                ]);
+                ])
+                .then(({name, id, email, github}) =>{
+                    const engineer = new Engineer(name, id, email, github);
+                    employeesArr.push(engineer);
+                    console.log(engineer);
+                    console.log(employeesArr);
+                    return promptEmployee(employeesArr);
+                })
 
             } else if (option === 'Add an Intern'){
                 inquirer
@@ -167,11 +195,13 @@ const promptEmployee = () =>{
                         type: 'input',
                         name: 'email',
                         message: "Enter the intern's email? (Required)",
-                        validate: emailInput => {
-                            if (emailInput) {
+                        validate: function (email) {
+
+                            valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                            if (valid) {
                             return true;
                             } else {
-                            console.log("Please enter the intern's email!");
+                            console.log("Please enter a valid email!");
                             return false;
                             }
                         }
@@ -190,28 +220,38 @@ const promptEmployee = () =>{
                         }
                     }
 
-                ]);
+                ])
+                .then(({name, id, email, school}) =>{
+                    const intern = new Intern(name, id, email, school);
+                    employeesArr.push(intern);
+                    console.log(intern);
+                    console.log(employeesArr);
+                    return promptEmployee(employeesArr);
+                })
 
             } else {
-                return employeeData;
+                console.log(employeesArr);
+                return employeesArr;                
             }
         })
-}
+};
 
 
-promptManager().then( managerInfo => {    
-       console.log(managerInfo)
-    });
-
-// writeFile(generatePage())
-//   .then(res => {
-//     console.log(res);
-//     return copyFile();
-//   })
-//   .then(res => {
-//     console.log(res);
-//     console.log('All Done!');
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
+promptManager()
+  .then(promptEmployee)
+  .then( employeesArr => {
+      return generatePage(employeesArr);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
+  });
