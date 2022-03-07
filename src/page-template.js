@@ -43,7 +43,7 @@ const generateEngineerCard = engineer => {
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${engineer.id}</li>
                 <li class="list-group-item">Email:${engineer.email}</li>
-                <li class="list-group-item">GitHub username: ${engineer.gitHub}</li>
+                <li class="list-group-item">GitHub username: <a href="https://github.com/${engineer.gitHub}" target="_blank"> ${engineer.gitHub}</a></</li>
                 </ul>
             </div>
         </div>
