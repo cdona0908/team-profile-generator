@@ -1,20 +1,23 @@
-// create employees cards
-const generateEmployees = employeesArr => {
+
+
+// create manager cards
+const generateManagerCard = manager => {
     return `
+    
     <div class="col-12 col-md-4">
         <div class="card " id="employee-card">
             <div class="card-header text-white">
-                <h3 class="card-title" id="employee-name">${name}</h3>
+                <h3 class="card-title" id="employee-name">${manager.name}</h3>
                 <div class="card-text">
-                <i class="${icon}"></i>
-                <h4>${rol}</h4>
+                <i class="fa-solid fa-mug-hot"></i>
+                <h4>Manager</h4>
                 </div>
             </div>
             <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${id}</li>
-                <li class="list-group-item">Email:${email}</li>
-                <li class="list-group-item">${contactLabel} ${contactInfo}</li>
+                <li class="list-group-item">ID: ${manager.id}</li>
+                <li class="list-group-item">Email:${manager.email}</li>
+                <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
                 </ul>
             </div>
         </div>
@@ -23,7 +26,93 @@ const generateEmployees = employeesArr => {
     `;
 };
 
-module.exports = templateData => {
+// create engineer cards
+const generateEngineerCard = engineer => {
+    return `
+    
+    <div class="col-12 col-md-4">
+        <div class="card " id="employee-card">
+            <div class="card-header text-white">
+                <h3 class="card-title" id="employee-name">${engineer.name}</h3>
+                <div class="card-text">
+                <i class="fa-solid fa-glasses"></i>
+                <h4>Engineer</h4>
+                </div>
+            </div>
+            <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${engineer.id}</li>
+                <li class="list-group-item">Email:${engineer.email}</li>
+                <li class="list-group-item">GitHub username: ${engineer.gitHub}</li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+
+    `;
+};
+
+// create Intern cards
+const generateIntrernCard = intern => {
+    return `
+    
+    <div class="col-12 col-md-4">
+        <div class="card " id="employee-card">
+            <div class="card-header text-white">
+                <h3 class="card-title" id="employee-name">${intern.name}</h3>
+                <div class="card-text">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h4>Intern</h4>
+                </div>
+            </div>
+            <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${intern.id}</li>
+                <li class="list-group-item">Email:${intern.email}</li>
+                <li class="list-group-item">School: ${intern.school}</li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+
+    `;
+};
+
+
+
+
+generatePage = (employeesData) => {
+     //create array to hold card for each employee
+    cardArr = [];
+    
+    for (var i=0 ; i<employeesData.length; i++){
+        const employee = employeesData[i];
+        const role = employee.getEmployeeRole();
+
+        if(role === 'Manager'){
+            const cardMngr = generateManagerCard(employee);
+            cardArr.push(cardMngr);
+        }
+        if(role === 'Engineer'){
+            const cardEng = generateEngineerCard(employee);
+            cardArr.push(cardEng);
+        }
+        if(role === 'Intern'){
+            const cardIntrn = generateInternCard(employee);
+            cardArr.push(cardIntrn);
+        }
+
+    }
+    
+    const employeesInfo = cardArr.join('')
+    const generateTeam = generateTemplate(employeesInfo);
+    return generateTeam;
+
+}
+
+
+
+const generateTemplate = function(employeesInfo) {
 
     return `
         <!DOCTYPE html>
@@ -49,7 +138,7 @@ module.exports = templateData => {
 
                 <main class="container my-5">
                     <div class="flex-row justify-content-around align-center row">
-                      ${generateEmployees(employeesArr)}
+                      ${employeesInfo}
                     </div>
                 </main>                
             </body>
@@ -57,3 +146,4 @@ module.exports = templateData => {
     `;
 };
 
+module.exports = generatePage;
