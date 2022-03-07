@@ -53,7 +53,7 @@ const generateEngineerCard = engineer => {
 };
 
 // create Intern cards
-const generateIntrernCard = intern => {
+const generateInternCard = intern => {
     return `
     
     <div class="col-12 col-md-4">
@@ -77,38 +77,6 @@ const generateIntrernCard = intern => {
 
     `;
 };
-
-
-
-
-generatePage = (employeesData) => {
-     //create array to hold card for each employee
-    cardArr = [];
-    
-    for (var i=0 ; i<employeesData.length; i++){
-        const employee = employeesData[i];
-        const role = employee.getEmployeeRole();
-
-        if(role === 'Manager'){
-            const cardMngr = generateManagerCard(employee);
-            cardArr.push(cardMngr);
-        }
-        if(role === 'Engineer'){
-            const cardEng = generateEngineerCard(employee);
-            cardArr.push(cardEng);
-        }
-        if(role === 'Intern'){
-            const cardIntrn = generateInternCard(employee);
-            cardArr.push(cardIntrn);
-        }
-
-    }
-    
-    const employeesInfo = cardArr.join('')
-    const generateTeam = generateTemplate(employeesInfo);
-    return generateTeam;
-
-}
 
 
 
@@ -146,4 +114,36 @@ const generateTemplate = function(employeesInfo) {
     `;
 };
 
-module.exports = generatePage;
+module.exports = (employeesData) => {
+    //create array to hold card for each employee
+   cardArr = [];
+   
+   for (var i=0 ; i<employeesData.length; i++){
+       const employee = employeesData[i];       
+       const role = employee.role;       
+
+       if(role === 'Manager'){
+           const cardMngr = generateManagerCard(employee);
+           cardArr.push(cardMngr);
+           
+       }
+       if(role === 'Engineer'){
+           const cardEng = generateEngineerCard(employee);
+           cardArr.push(cardEng);
+           
+       }
+       if(role === 'Intern'){
+           const cardIntrn = generateInternCard(employee);
+           cardArr.push(cardIntrn);
+           
+       }
+
+   }
+   
+   const employeesInfo = cardArr.join('')
+   
+   const generateTeam = generateTemplate(employeesInfo);
+   
+   return generateTeam;
+
+};

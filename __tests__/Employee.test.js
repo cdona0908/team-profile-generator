@@ -10,9 +10,3 @@ test('creates an employee object', () => {
   expect(employee.email).toEqual(expect.any (String));
   
 });
-
-test('get employee role', () =>{
-  const employee = new Employee('Peter', '145', 'pt@gmail.com');
-
-  expect(employee.getEmployeeRole()).toEqual('Employee');
-});

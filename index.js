@@ -132,7 +132,7 @@ async function addEngineer() {
         },
         {
             type: 'input',
-            name: 'github',
+            name: 'gitHub',
             message: "Enter the engineer's GitHub username? (Required)",
             // validate: gitHubInput => {
             //     if (gitHubInput) {
