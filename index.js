@@ -17,6 +17,7 @@ const employeesArr =[];
 
 //Start app by prompting the manager
 const promptManager = () => {
+    
     return inquirer.prompt([
         {
             type: 'input',
@@ -72,15 +73,17 @@ const promptManager = () => {
                 }
             }
         }
+        //create new manager object and add it to the employee's array
     ]).then(({name, id, email, office})=>{
         const manager = new Manager(name, id, email, office);
         employeesArr.push(manager);
         console.log (manager);
         //console.log(employeesArr);
         
-    })
+    });
 };
 
+//give user options to add employees or finish building the team
 const promptEmployee = () =>{
     
     inquirer
@@ -91,6 +94,7 @@ const promptEmployee = () =>{
             choices: ['Add an Engineer', 'Add an Intern', 'Finish building my team']
         })
         .then(({option})=>{
+            //if add Engineer is selected, then prompt questions for engineers
             if(option === 'Add an Engineer'){
                 inquirer
                  .prompt([
@@ -152,14 +156,16 @@ const promptEmployee = () =>{
                     }
 
                 ])
+                //create new engineer object and add it to the employee's array
                 .then(({name, id, email, github}) =>{
                     const engineer = new Engineer(name, id, email, github);
                     employeesArr.push(engineer);
                     console.log(engineer);
                     console.log(employeesArr);
-                    return promptEmployee(employeesArr);
+                    promptEmployee(employeesArr);
                 })
 
+                //if add Intern is selected, then prompt questions for interns
             } else if (option === 'Add an Intern'){
                 inquirer
                  .prompt([
@@ -221,37 +227,41 @@ const promptEmployee = () =>{
                     }
 
                 ])
+                //create new intern object and add it to the intern's array
                 .then(({name, id, email, school}) =>{
                     const intern = new Intern(name, id, email, school);
                     employeesArr.push(intern);
-                    console.log(intern);
-                    console.log(employeesArr);
-                    return promptEmployee(employeesArr);
+                    //console.log(intern);
+                    //console.log(employeesArr);
+                    promptEmployee(employeesArr);
                 })
 
+             //if 'finish building team' is selected, then return the final array of employees
             } else {
                 console.log(employeesArr);
                 return employeesArr;                
             }
-        })
+        });
 };
 
 
 promptManager()
-  .then(promptEmployee)
-  .then( employeesArr => {
-      return generatePage(employeesArr);
+  .then(promptEmployee)  
+  .then( finalArr => {
+      return generatePage(finalArr);
   })
-  .then(pageHTML => {
-    return writeFile(pageHTML);
-  })
-  .then(writeFileResponse => {
-    console.log(writeFileResponse);
-    return copyFile();
-  })
-  .then(copyFileResponse => {
-    console.log(copyFileResponse);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+  
+  
+//   .then(pageHTML => {
+//     return writeFile(pageHTML);
+//   })
+//   .then(writeFileResponse => {
+//     console.log(writeFileResponse);
+//     return copyFile();
+//   })
+//   .then(copyFileResponse => {
+//     console.log(copyFileResponse);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });

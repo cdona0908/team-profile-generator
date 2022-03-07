@@ -49,7 +49,7 @@ module.exports = templateData => {
 
                 <main class="container my-5">
                     <div class="flex-row justify-content-around align-center row">
-                      ${generateEmployees()}
+                      ${generateEmployees(employeesArr)}
                     </div>
                 </main>                
             </body>
