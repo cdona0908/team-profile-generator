@@ -23,55 +23,55 @@ const promptManager = () => {
             type: 'input',
             name: 'name',
             message: "What is the team manager's name? (Required)",
-            // validate: nameInput => {
-            //     if (nameInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the manager's name!");
-            //     return false;
-            //     }
-            // }
+            validate: nameInput => {
+                if (nameInput) {
+                return true;
+                } else {
+                console.log("Please enter the manager's name!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'id',
             message: "Enter the manager's employee id? (Required)",
-            // validate: idInput => {
-            //     if (idInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the manager's employee id!");
-            //     return false;
-            //     }
-            // }
+            validate: idInput => {
+                if (idInput) {
+                return true;
+                } else {
+                console.log("Please enter the manager's employee id!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: "Enter the manager's email? (Required)",
-            // validate: function (email) {
+            validate: function (email) {
 
-            //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-            //     if (valid) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter a valid email!");
-            //     return false;
-            //     }
-            // }
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                return true;
+                } else {
+                console.log("Please enter a valid email!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'office',
             message: "Enter the manager's office number? (Required)",
-            // validate: officeInput => {
-            //     if (isNaN(officeInput)) {
-            //     console.log("Please enter a valid office number!");
-            //     return false;                
-            //     } else {
-            //         return true;
-            //     }
-            // }
+            validate: officeInput => {
+                if (isNaN(officeInput)) {
+                console.log("Please enter a valid office number!");
+                return false;                
+                } else {
+                    return true;
+                }
+            }
         }
         //create new manager object and add it to the employee's array
     ]).then(({name, id, email, office})=>{
@@ -91,14 +91,14 @@ async function addEngineer() {
             type: 'input',
             name: 'name',
             message: "What is the engineer's name? (Required)",
-            // validate: nameInput => {
-            //     if (nameInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the engineers's name!");
-            //     return false;
-            //     }
-            // }
+            validate: nameInput => {
+                if (nameInput) {
+                return true;
+                } else {
+                console.log("Please enter the engineers's name!");
+                return false;
+                }
+            }
 
             },
 
@@ -106,42 +106,42 @@ async function addEngineer() {
             type: 'input',
             name: 'id',
             message: "Enter the engineer's employee id? (Required)",
-            // validate: idInput => {
-            //     if (idInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the engineer's employee id!");
-            //     return false;
-            //     }
-            // }
+            validate: idInput => {
+                if (idInput) {
+                return true;
+                } else {
+                console.log("Please enter the engineer's employee id!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: "Enter the engineer's email? (Required)",
-            // validate: function (email) {
+            validate: function (email) {
 
-            //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-            //     if (valid) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter a valid email!");
-            //     return false;
-            //     }
-            // }
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                return true;
+                } else {
+                console.log("Please enter a valid email!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'gitHub',
             message: "Enter the engineer's GitHub username? (Required)",
-            // validate: gitHubInput => {
-            //     if (gitHubInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the engineer's GitHub username!");
-            //     return false;
-            //     }
-            // }
+            validate: gitHubInput => {
+                if (gitHubInput) {
+                return true;
+                } else {
+                console.log("Please enter the engineer's GitHub username!");
+                return false;
+                }
+            }
         }
         
     ]);
@@ -155,14 +155,14 @@ async function addIntern() {
             type: 'input',
             name: 'name',
             message: "What is the intern's name? (Required)",
-            // validate: nameInput => {
-            //     if (nameInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the intern's name!");
-            //     return false;
-            //     }
-            // }
+            validate: nameInput => {
+                if (nameInput) {
+                return true;
+                } else {
+                console.log("Please enter the intern's name!");
+                return false;
+                }
+            }
 
          },
 
@@ -170,42 +170,42 @@ async function addIntern() {
             type: 'input',
             name: 'id',
             message: "Enter the intern's employee id? (Required)",
-            // validate: idInput => {
-            //     if (idInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the intern's employee id!");
-            //     return false;
-            //     }
-            // }
+            validate: idInput => {
+                if (idInput) {
+                return true;
+                } else {
+                console.log("Please enter the intern's employee id!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'email',
             message: "Enter the intern's email? (Required)",
-            // validate: function (email) {
+            validate: function (email) {
 
-            //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-            //     if (valid) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter a valid email!");
-            //     return false;
-            //     }
-            // }
+                valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+                if (valid) {
+                return true;
+                } else {
+                console.log("Please enter a valid email!");
+                return false;
+                }
+            }
         },
         {
             type: 'input',
             name: 'school',
             message: "Enter the intern's school name? (Required)",
-            // validate: schoolInput => {
-            //     if (schoolInput) {
-            //     return true;
-            //     } else {
-            //     console.log("Please enter the intern's school name!");
-            //     return false;
-            //     }
-            // }
+            validate: schoolInput => {
+                if (schoolInput) {
+                return true;
+                } else {
+                console.log("Please enter the intern's school name!");
+                return false;
+                }
+            }
         }      
         
     ]);
@@ -255,19 +255,4 @@ promptManager().then( async () => {
     await promptMainMenu();
 })
 
-
   
-  
-//   .then(pageHTML => {
-//     return writeFile(pageHTML);
-//   })
-//   .then(writeFileResponse => {
-//     console.log(writeFileResponse);
-//     return copyFile();
-//   })
-//   .then(copyFileResponse => {
-//     console.log(copyFileResponse);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
